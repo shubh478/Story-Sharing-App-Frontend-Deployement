@@ -150,7 +150,7 @@ const Stories = ({
   const handleShare = () => {
     // Get the ID of the current story
     setLinkCopied(!linkCopied);
-    const storyLink = `http://localhost:5173/viewStory/${storyUserId}`; // Construct the URL with the story ID
+    const storyLink = `https://story-sharing-app-frontend-deployement.vercel.app/viewStory/${storyUserId}`; // Construct the URL with the story ID
     navigator.clipboard.writeText(storyLink); // Copy the URL to the clipboard
     toast.success("Link copied to clipboard");
   };
