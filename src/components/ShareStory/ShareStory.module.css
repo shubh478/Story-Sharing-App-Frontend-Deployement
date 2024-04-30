@@ -129,3 +129,71 @@
   align-items: center;
   min-height: 100vh;
 }
+@media (max-width: 480px) {
+  .progressBarContainer {
+    margin-top: 0.5rem;
+  }
+  .slideImage {
+    width: 100vw;
+    height: 100vh;
+    top: 113px;
+    left: 443px;
+
+    border-radius: 0;
+  }
+  .storiesContainer {
+    display: block;
+    width: 100vw;
+    padding: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .heading {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 0rem;
+  }
+  .slideContainer {
+    margin-bottom: 0;
+  }
+  .register,
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 20%;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  .firstContainer {
+    position: absolute;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    width: 90%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+  .navigation {
+    display: none;
+  }
+  .secondContainer {
+    position: absolute;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    width: 90%;
+    margin-left: 1rem;
+    margin-top: 0.1rem;
+    margin-bottom: 1.8rem;
+    gap: 1rem;
+  }
+}

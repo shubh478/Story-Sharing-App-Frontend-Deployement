@@ -87,8 +87,7 @@ const Stories = ({
           setCurrentSlideIndex(currentSlideIndex + 1);
           setProgress(0);
         } else if (currentSlideIndex === stories.length - 1) {
-          setCurrentSlideIndex(0);
-          setProgress(0);
+          closeStoryPopup();
         }
       }
     }, 50);
@@ -128,15 +127,14 @@ const Stories = ({
       }
       setIsLiked(!isLiked);
 
-      // Send a request to like the story
       await axios.post(
         `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/like/${storyUserId}`
       );
-      // Fetch the updated likes count after the like operation
+
       const response = await axios.get(
         `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/likes-count/${storyUserId}`
       );
-      // Update the likes count state with the new value
+
       setLikesCount(response.data.likesCount);
     } catch (error) {
       toast.error("An error occurred while liking the story");
@@ -148,10 +146,9 @@ const Stories = ({
     handleSlideClick();
   };
   const handleShare = () => {
-    // Get the ID of the current story
     setLinkCopied(!linkCopied);
-    const storyLink = `https://story-sharing-app-frontend-deployement.vercel.app/viewStory/${storyUserId}`; // Construct the URL with the story ID
-    navigator.clipboard.writeText(storyLink); // Copy the URL to the clipboard
+    const storyLink = `https://story-sharing-app-frontend-deployement.vercel.app/viewStory/${storyUserId}`;
+    navigator.clipboard.writeText(storyLink);
     toast.success("Link copied to clipboard");
   };
   const handleSlideTap = (e) => {

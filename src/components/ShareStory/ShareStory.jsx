@@ -35,10 +35,10 @@ const ShareStory = () => {
           `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/${storyId}`
         );
         setStory(response.data.story.slides);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       } catch (err) {
         toast.error("An error occurred while fetching story details");
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
       }
     };
 
@@ -95,6 +95,8 @@ const ShareStory = () => {
         if (currentSlideIndex < stories.length - 1) {
           setCurrentSlideIndex(currentSlideIndex + 1);
           setProgress(0);
+        } else if (currentSlideIndex === stories.length - 1) {
+          closeStoryPopup();
         }
       }
     }, 50);
@@ -131,15 +133,15 @@ const ShareStory = () => {
         return;
       }
       setIsLiked(!isLiked);
-      // Send a request to like the story
+
       await axios.post(
         `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/like/${storyId}`
       );
-      // Fetch the updated likes count after the like operation
+
       const response = await axios.get(
         `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/likes-count/${storyId}`
       );
-      // Update the likes count state with the new value
+
       setLikesCount(response.data.likesCount);
     } catch (error) {
       toast.error("An error occurred while liking the story");
@@ -149,14 +151,35 @@ const ShareStory = () => {
     setShowLogin(!showLogin);
   };
   const handleShare = () => {
-    // Get the ID of the current story
     if (linkCopied) return;
     setLinkCopied(!linkCopied);
-    const storyLink = `http://localhost:5173/viewStory/${storyId}`; // Construct the URL with the story ID
-    navigator.clipboard.writeText(storyLink); // Copy the URL to the clipboard
+    const storyLink = `https://story-sharing-app-frontend-deployement.vercel.app/viewStory/${storyUserId}`;
+    navigator.clipboard.writeText(storyLink);
     toast.success("Link copied to clipboard");
   };
-
+  const handleSlideTap = (e) => {
+    const containerWidth = e.currentTarget.offsetWidth;
+    const clickX = e.nativeEvent.offsetX;
+    const leftThreshold = containerWidth * 0.3;
+    const rightThreshold = containerWidth * 0.7;
+    if (clickX < leftThreshold) {
+      if (currentSlideIndex > 0) {
+        setCurrentSlideIndex(currentSlideIndex - 1);
+        setProgress(0);
+      } else {
+        setCurrentSlideIndex(stories.length - 1);
+        setProgress(0);
+      }
+    } else if (clickX > rightThreshold) {
+      if (currentSlideIndex < stories.length - 1) {
+        setCurrentSlideIndex(currentSlideIndex + 1);
+        setProgress(0);
+      } else {
+        setCurrentSlideIndex(0);
+        setProgress(0);
+      }
+    }
+  };
   return (
     <div className={styles.container}>
       {loading ? (
@@ -174,7 +197,10 @@ const ShareStory = () => {
             }}
             className={styles.navigation}
           />
-          <div className={styles.slideContainer}>
+          <div
+            className={styles.slideContainer}
+            onClick={window.innerWidth <= 480 ? handleSlideTap : null}
+          >
             <div className={styles.firstContainer}>
               <div className={styles.progressBarContainer}>
                 {stories.map((_, index) => (
