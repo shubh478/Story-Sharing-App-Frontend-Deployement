@@ -37,7 +37,6 @@ const HomePage = () => {
     }
   }, []);
   useEffect(() => {
-    console.log("i m here for location changes");
     const fetchUserID = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -60,7 +59,6 @@ const HomePage = () => {
   }, [location.pathname, isLoggedIn]);
 
   useEffect(() => {
-    console.log("Checking location...");
     const token = localStorage.getItem("token");
     if (token) {
       // Check if the current location is the homepage
@@ -73,7 +71,7 @@ const HomePage = () => {
 
   useEffect(() => {
     // Check if shouldShowLogin is true, then show the login component
-    console.log("i m here nothing changed");
+
     if (shouldShowLogin) {
       setShowLogin(true);
     }
@@ -83,7 +81,6 @@ const HomePage = () => {
   }, [shouldShowLogin, isLoggedIn]);
 
   const handleLogin = () => {
-    console.log("i m after login here in handleLogin");
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     if (!token) {
@@ -110,7 +107,6 @@ const HomePage = () => {
     setSelectedFilter(item);
   };
   const handleUserStories = () => {
-    console.log(" i m here");
     setShowMbileViewYourStory(true);
     setShowFilter(false);
     setSelectedFilter("");

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
+import { toast } from "react-toastify";
 
 const FruitsStories = ({ userID, storiesUpdated }) => {
   const [fruits, setFruitsStories] = useState([]);
@@ -16,7 +17,7 @@ const FruitsStories = ({ userID, storiesUpdated }) => {
         );
         setFruitsStories(response.data);
       } catch (error) {
-        console.error("Error fetching fruits stories:", error);
+        toast.error("Error fetching fruits stories:", error);
       }
     };
     fetchFruitsStories();

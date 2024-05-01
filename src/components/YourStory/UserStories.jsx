@@ -3,6 +3,7 @@ import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
 import editButton from "../../assets/editButton.png";
+import { toast } from "react-toastify";
 const UserStories = ({ userID, storiesUpdated }) => {
   const [userStories, setUserStories] = useState([]);
   const [seeMoreUser, setSeeMoreUser] = useState(false);
@@ -18,9 +19,8 @@ const UserStories = ({ userID, storiesUpdated }) => {
           "https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/user-stories"
         );
         setUserStories(response.data);
-        console.log("user story :", response.data);
       } catch (error) {
-        console.error("Error fetching user stories:", error);
+        toast.error("Error fetching user stories:", error);
       }
     };
     fetchUserStories();

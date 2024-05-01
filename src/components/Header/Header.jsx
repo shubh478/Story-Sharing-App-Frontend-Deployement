@@ -41,7 +41,6 @@ const Header = ({
     localStorage.removeItem("name");
     localStorage.removeItem("userId");
     if (!inBookmark) {
-      console.log("need to be checked");
       setIsLoggedIn(false);
       setUserName("");
       handleLogin();
@@ -80,7 +79,6 @@ const Header = ({
     setShowAddStory(!showAddStory);
   };
   const handleYourStory = () => {
-    console.log("i m in ur story problem");
     if (mobileViewHeader) {
       navigate("/", { state: { showYourStoryThroughBokkmark: true } });
     }

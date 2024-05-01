@@ -18,9 +18,7 @@ const Story = ({
   const [storyId, setStoryId] = useState(story._id);
 
   const [openAddStory, setOpenAddStory] = useState(false);
-  useEffect(() => {
-    console.log("story :", story);
-  }, [story]);
+  useEffect(() => {}, [story]);
 
   const handleLogin = () => {
     setIsAuthenticated(true);

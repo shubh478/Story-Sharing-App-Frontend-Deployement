@@ -5,6 +5,7 @@ import styles from "../../pages/HomePage.module.css";
 import Header from "../Header/Header";
 import NoBookmarkimage from "../../assets/NoBookmarkimage.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 const BookmarkStories = () => {
   const [bookmarkedStories, setBookmarkedStories] = useState([]);
   const [seeMoreBookmarked, setSeeMoreBookmarked] = useState(false);
@@ -27,9 +28,8 @@ const BookmarkStories = () => {
           "https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/bookmarked"
         );
         setBookmarkedStories(response.data.bookmarkedStories);
-        console.log("bookmarked stories:", response.data.bookmarkedStories);
       } catch (error) {
-        console.error("Error fetching bookmarked stories:", error);
+        toast.error("Error fetching bookmarked stories:", error);
       }
     };
     fetchBookmarkedStories();
@@ -38,7 +38,6 @@ const BookmarkStories = () => {
     setEdited(!edited);
   };
   const handleRemove = () => {
-    console.log("here in remove");
     setRemoved(!removed);
   };
   const renderBookmarkedStories = (stories, seeMore) => {

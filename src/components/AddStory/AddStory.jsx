@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./AddStory.module.css";
 import CrossIcon from "../../assets/CrossIcon.svg";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
   const [count, setCount] = useState(0);
   const [slides, setSlides] = useState(
@@ -15,13 +15,8 @@ function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
         ]
   );
   const [activeSlide, setActiveSlide] = useState(0);
-  console.log("slide :", initialStory);
-  console.log("activeSlide :", activeSlide);
-  console.log("count :", count);
 
   const handleInputChange = (e, index) => {
-    console.log("index :", index);
-    console.log("active slide :", activeSlide);
     const { name, value } = e.target;
     const updatedSlides = [...slides];
     updatedSlides[index][name] = value;
@@ -52,7 +47,7 @@ function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
               slides,
             }
           );
-          console.log("Story edited successfully");
+          toast.success("Story edited successfully");
         } else {
           // If initialStory doesn't exist, call saveStory endpoint
           await axios.post(
@@ -61,11 +56,11 @@ function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
               slides,
             }
           );
-          console.log("Story posted successfully");
+          toast.success("Story posted successfully");
         }
         closePopup();
       } catch (error) {
-        console.error("Error:", error);
+        toast.error("Error:", error);
         alert("Error processing the request. Please try again.");
       }
     } else {
@@ -74,7 +69,6 @@ function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
   };
 
   const handleAddSlide = () => {
-    console.log("slides.length :", slides.length);
     setSlides([
       ...slides,
       { heading: "", description: "", imageUrl: "", category: "" },
@@ -97,12 +91,10 @@ function AddStory({ closePopup, initialStory, storyId, inBookmark }) {
   };
 
   const handlePrevSlide = () => {
-    console.log("slides.length :", activeSlide);
     setActiveSlide(activeSlide > 0 ? activeSlide - 1 : 0);
   };
 
   const handleNextSlide = () => {
-    console.log("slides.length :", activeSlide);
     setActiveSlide(
       activeSlide < slides.length - 1 ? activeSlide + 1 : slides.length - 1
     );

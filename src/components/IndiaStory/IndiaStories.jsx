@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
-
+import { toast } from "react-toastify";
 const IndiaStories = ({ userID, storiesUpdated }) => {
   const [india, setIndiaStories] = useState([]);
   const [seeMoreIndia, setSeeMoreIndia] = useState(false);
@@ -16,7 +16,7 @@ const IndiaStories = ({ userID, storiesUpdated }) => {
         );
         setIndiaStories(response.data);
       } catch (error) {
-        console.error("Error fetching India stories:", error);
+        toast.error("Error fetching India stories:", error);
       }
     };
     fetchIndiaStories();

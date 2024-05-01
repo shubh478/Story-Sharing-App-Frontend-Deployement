@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
-
+import { toast } from "react-toastify";
 const MedicalStories = ({ userID, storiesUpdated }) => {
   const [medical, setMedicalStories] = useState([]);
   const [seeMoreMedical, setSeeMoreMedical] = useState(false);
@@ -16,7 +16,7 @@ const MedicalStories = ({ userID, storiesUpdated }) => {
         );
         setMedicalStories(response.data);
       } catch (error) {
-        console.error("Error fetching medical stories:", error);
+        toast.error("Error fetching medical stories:", error);
       }
     };
     fetchMedicalStories();

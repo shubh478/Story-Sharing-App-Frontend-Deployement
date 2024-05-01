@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
-
+import { toast } from "react-toastify";
 const WorldStories = ({ userID, storiesUpdated }) => {
   const [world, setWorldStories] = useState([]);
   const [seeMoreWorld, setSeeMoreWorld] = useState(false);
@@ -16,7 +16,7 @@ const WorldStories = ({ userID, storiesUpdated }) => {
         );
         setWorldStories(response.data);
       } catch (error) {
-        console.error("Error fetching world stories:", error);
+        toast.error("Error fetching world stories:", error);
       }
     };
     fetchWorldStories();

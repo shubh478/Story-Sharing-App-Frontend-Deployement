@@ -64,11 +64,10 @@ const Stories = ({
   useEffect(() => {
     const fetchLikesCount = async () => {
       try {
-        console.log("in like count");
         const response = await axios.get(
           `https://story-sharing-app-bakend-deployment.vercel.app/api/v1/story/likes-count/${storyUserId}`
         );
-        console.log("response.data.likesCoun :", response.data.likesCount);
+
         setLikesCount(response.data.likesCount);
       } catch (err) {
         toast.error("An error occurred while fetching likes count");
