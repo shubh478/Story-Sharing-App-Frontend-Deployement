@@ -3,6 +3,7 @@ import Story from "../Story/Story";
 import axios from "axios";
 import styles from "../../pages/HomePage.module.css";
 import { toast } from "react-toastify";
+
 const IndiaStories = ({ userID, storiesUpdated }) => {
   const [india, setIndiaStories] = useState([]);
   const [seeMoreIndia, setSeeMoreIndia] = useState(false);
